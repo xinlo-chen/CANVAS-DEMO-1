@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>画板</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <canvas id="canvas" width="100" height="100"></canvas>
     <script>
-        let canvas = document.getElementById("canvas");
+        let canvas = document.getElementById('canvas')
         canvas.width = document.documentElement.clientWidth
         canvas.height = document.documentElement.clientHeight
-        let ctx = canvas.getContext('2d');
-        ctx.fillStyle = "black";
+            // 获取用户设备宽高
+        let ctx = canvas.getContext('2d')
+        ctx.fillStyle = 'black'
         ctx.strokeStyle = 'none'
-        ctx.lineWidth = 8;
-        ctx.lineCap = "round";
+        ctx.lineWidth = 8
+        ctx.lineCap = 'round'
 
         let painting = false
         let last
 
-        let isTouchDevice = 'ontouchstart' in document.documentElement;
+        let isTouchDevice = 'ontouchstart' in document.documentElement
+            // 判断是否为触屏设备
         if (isTouchDevice) {
             canvas.ontouchstart = (e) => {
                 let x = e.touches[0].clientX
                 let y = e.touches[0].clientY
                 last = [x, y]
+                    // 获取触屏设备初始坐标
             }
             canvas.ontouchmove = (e) => {
                 let x = e.touches[0].clientX
@@ -36,7 +39,6 @@
                 drawLine(last[0], last[1], x, y)
                 last = [x, y]
             }
-
         } else {
             canvas.onmousedown = (e) => {
                 painting = true
@@ -56,10 +58,11 @@
         }
 
         function drawLine(x1, y1, x2, y2) {
-            ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
-            ctx.stroke();
+            ctx.beginPath()
+            ctx.moveTo(x1, y1)
+            ctx.lineTo(x2, y2)
+            ctx.stroke()
+                // 创建一个画线函数
         }
     </script>
 </body>
